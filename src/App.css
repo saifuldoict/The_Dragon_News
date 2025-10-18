@@ -1,6 +1,26 @@
+
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+};
 
 .my-btn {
   @apply btn w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold border-none hover:scale-105 transition-transform duration-200;
 }
+
+@plugin 'daisyui/theme' {
+    "name": "light",
+    "default": true,
+    "primary": "#403f3f",
+    "secondary": "#d72050",
+    "accent": "#37cdbe",
+    "neutral": "#3d4451",
+    "base-200": "#f3f3f3",
+    "base-300": "#e7e7e7",
+    "color-accent": "#706f6f",
+    "info": "#2094f3",
+    "success": "#009485",
+    "warning": "#ff9900",
+    "error": "#ff5724",
+};
+

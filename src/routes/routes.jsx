@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import MainLayout from "../layout/MainLayout";
+import HomeLayout from "../layout/HomeLayout";
 import Homepage from "../pages/HomePage";
 import AboutUs from "../pages/AboutUs";
 import Profile from "../pages/Profile";
@@ -10,7 +10,7 @@ import Signin from "../pages/Signin";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout/>,
+        element: <HomeLayout/>,
         children: [
             {
                 index: true,
@@ -31,7 +31,6 @@ const router = createBrowserRouter([
             {
                 path:"/signin",
                 element: <Signin/>
-
             }
             
         ]
