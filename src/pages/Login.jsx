@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const googleProvider = new GoogleAuthProvider()
 
 
-const Signin = () => {
+const Login = () => {
 const [user, setUser] = useState(null);
 const [show, setShow] = useState(false);
   
@@ -174,4 +174,4 @@ const handleSignin = (e) => {
   );
 };
 
-export default Signin;
+export default Login;
