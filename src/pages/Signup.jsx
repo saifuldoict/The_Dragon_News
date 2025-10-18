@@ -7,17 +7,27 @@ import MyContainer from "../components/MyContainer.jsx";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase.config.js";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 
 
 const Signup = () => {
+  const [show, setShow] = useState(false);
   const handleSignup = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if(password.length <6){
-      toast.error("password should be at least 6 digit")
+    // 
+    const regExp =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
+      console.log(regExp.test(password));
+
+    if (!regExp.test(password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
+      );
+      return;
     }
    createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
@@ -75,11 +85,17 @@ const Signup = () => {
                   Password
                 </label>
                 <input
-                  type={"text"}
+                  type={show ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
+                <span
+                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-white/70 cursor-pointer hover:text-white"
+                  onClick={() => setShow(!show)}
+                >
+                  {show ? <IoEyeOff size={20} /> : <FaEye size={20} />}
+                  </span>
               </div>
 
               <button type="submit" className="my-btn">
