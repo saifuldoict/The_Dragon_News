@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { use } from 'react'
+
+
 
 const CategoryNews = () => {
+  
+  
   return (
     <div>CategoryNews</div>
   )

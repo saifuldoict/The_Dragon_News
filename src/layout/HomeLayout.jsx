@@ -23,7 +23,7 @@ const HomeLayout = () => {
       </header>
 
     
-    <main className='home_layout w-11/12 mx-auto mb-10 flex gap-6 *:border'>
+    <main className='home_layout w-11/12 mx-auto mb-10 flex gap-6 '>
      
       <aside className='left_nav'>
         <LeftAside/>

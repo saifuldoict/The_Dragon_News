@@ -2,7 +2,7 @@ import React from 'react'
 
 const RightAside = () => {
   return (
-    <div>RightAside</div>
+    <div>RightAsid</div>
   )
 }
 
