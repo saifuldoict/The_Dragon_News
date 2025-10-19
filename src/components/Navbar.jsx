@@ -25,7 +25,7 @@ const Navbar = () => {
 
         <button className="bg-purple-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
           <img src={user} alt="user" className="w-[20px] inline-block mr-2"/>
-          <Link to={"/signin"}>Login</Link>
+          <Link to={"/auth/login"}>Login</Link>
         </button>
       </MyContainer>
     </div>

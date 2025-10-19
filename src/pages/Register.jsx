@@ -11,7 +11,7 @@ import { useState } from "react";
 
 
 
-const Signup = () => {
+const Register = () => {
   const [show, setShow] = useState(false);
   const handleSignup = (e) => {
     e.preventDefault();
@@ -121,4 +121,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;
