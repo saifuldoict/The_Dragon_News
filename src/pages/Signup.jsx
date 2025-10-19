@@ -91,7 +91,7 @@ const Signup = () => {
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
                 <span
-                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-white/70 cursor-pointer hover:text-white"
+                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-white/70  hover:text-white"
                   onClick={() => setShow(!show)}
                 >
                   {show ? <IoEyeOff size={20} /> : <FaEye size={20} />}
