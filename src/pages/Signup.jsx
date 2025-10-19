@@ -38,7 +38,7 @@ const Signup = () => {
         console.log(e);
         console.log(e.message);
         toast.error(
-            "User already exists in the database. Etai bastob haahahahaha"
+            "User already exists in the database. Etai bastob haah"
   )});
    
   };
