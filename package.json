@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
+    "@types/date-fns": "^2.5.3",
     "@types/firebase": "^2.4.32",
     "@types/react-icons": "^2.2.7",
     "@types/react-router": "^5.1.20",
