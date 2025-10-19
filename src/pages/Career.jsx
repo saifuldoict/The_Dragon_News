@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-const Profile = () => {
+const Career = () => {
   const handleNotify = () => {
     toast.success("🎉 You’ll be notified when the profile is ready!", {
       position: "top-center",
@@ -36,4 +36,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Career;

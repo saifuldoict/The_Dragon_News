@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router";
-import MainLayout from "../layout/MainLayout";
+import HomeLayout from "../layout/HomeLayout";
 import Homepage from "../pages/HomePage";
 import AboutUs from "../pages/AboutUs";
-import Profile from "../pages/Profile";
+import Profile from "../pages/Career";
 import Signup from "../pages/Signup";
-import Signin from "../pages/Signin";
+import Login from "../pages/Login";
+import CategoryNews from "../pages/CategoryNews";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout/>,
+        element: <HomeLayout/>,
         children: [
             {
                 index: true,
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
                 element:<AboutUs/>
             },
             {
-                path:"/profile",
+                path:"/career",
                 element:<Profile/>
             },
             {
@@ -30,8 +31,11 @@ const router = createBrowserRouter([
             },
             {
                 path:"/signin",
-                element: <Signin/>
-
+                element: <Login/>
+            },
+            {
+                path: "/category/:id",
+                element: <CategoryNews/>
             }
             
         ]

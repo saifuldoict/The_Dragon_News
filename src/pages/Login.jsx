@@ -1,28 +1,64 @@
-import React from "react";
+import React,{useState} from "react";
 
 import MyContainer from "../components/MyContainer";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
+import { toast } from "react-toastify";
 
 
 
+const googleProvider = new GoogleAuthProvider()
 
 
-const Signin = () => {
+const Login = () => {
+const [user, setUser] = useState(null);
+const [show, setShow] = useState(false);
   
 
-  const handleSignin = (e) => {
-   
+const handleSignin = (e) => {
+   e.preventDefault();
+   const email = e.target.email.value;
+   const password = e.target.password.value;
+
+   signInWithEmailAndPassword(auth, email, password)
+   .then((res) => {
+    console.log(res);
+    setUser(res.user);
+    toast.success("Signin successful");
+   })
+   .catch((e) => {
+    console.log(e);
+    toast.error(e.message);
+   });
     
   };
 
   const handleGoogleSignin = () => {
-    
+   console.log("google signin");
+    signInWithPopup(auth, googleProvider)
+    .then((res) => {
+      console.log(res);
+      setUser(res.user);
+      toast.success("Google Signin successful");
+    })
+    .catch((e) => {
+      console.log(e);
+      toast.error(e.message);
+    });
   };
 
   const handleSignout = () => {
-   
+   signOut(auth)
+      .then(() => {
+        toast.success("Signout successful");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      }); 
   };
 
   return (
@@ -48,8 +84,20 @@ const Signin = () => {
 
           {/* Login card */}
           <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8">
-          
-              <form onSubmit={handleSignin} className="space-y-5">
+          {
+            user ? (<div className="text-center space-y-3">
+               <img
+                  src={user?.photoURL || "https://via.placeholder.com/88"}
+                  className="h-20 w-20 rounded-full mx-auto"
+                  alt=""
+                />
+                 <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+                <p className="text-white/80">{user?.email}</p>
+                 <button onClick={handleSignout} className="my-btn">
+                  Sign Out
+                </button>
+            </div>) : (
+               <form onSubmit={handleSignin} className="space-y-5">
                 <h2 className="text-2xl font-semibold mb-2 text-center text-white">
                   Sign In
                 </h2>
@@ -67,16 +115,16 @@ const Signin = () => {
                 <div className="relative">
                   <label className="block text-sm mb-1">Password</label>
                   <input
-                    type={"password"}
+                    type={show ? 'text':"password"}
                     name="password"
                     placeholder="••••••••"
                     className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                   <span
-                    
                     className="absolute right-[8px] top-[36px] cursor-pointer z-50"
+                    onClick={()=> setShow(!show)}
                   >
-                 
+                 {show ? <IoEyeOff size={20} /> : <FaEye size={20} />}
                   </span>
                 </div>
 
@@ -115,6 +163,9 @@ const Signin = () => {
                   </Link>
                 </p>
               </form>
+            )
+          }
+             
   
           </div>
         </div>
@@ -123,4 +174,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Login;
