@@ -11,7 +11,7 @@ import { useState } from "react";
 
 
 
-const Signup = () => {
+const Register = () => {
   const [show, setShow] = useState(false);
   const handleSignup = (e) => {
     e.preventDefault();
@@ -91,7 +91,7 @@ const Signup = () => {
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
                 <span
-                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-white/70 cursor-pointer hover:text-white"
+                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-white/70  hover:text-white"
                   onClick={() => setShow(!show)}
                 >
                   {show ? <IoEyeOff size={20} /> : <FaEye size={20} />}
@@ -106,7 +106,7 @@ const Signup = () => {
                 <p className="text-sm text-white/80">
                   Already have an account?{" "}
                   <Link
-                    to="/signin"
+                    to="/auth/login"
                     className="text-pink-300 hover:text-white font-medium underline"
                   >
                     Sign in
@@ -121,4 +121,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;
