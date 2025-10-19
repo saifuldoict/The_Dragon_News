@@ -23,15 +23,15 @@ const HomeLayout = () => {
       </header>
 
     
-    <main className='home_layout w-11/12 mx-auto mb-10 flex gap-6 '>
+    <main className='w-11/12 mx-auto my-3 grid grid-cols-12 gap-5 '>
      
-      <aside className='left_nav'>
+      <aside className='col-span-3'>
         <LeftAside/>
       </aside>
-      <section className='main_content'>
+      <section className='main col-span-6'>
         <Outlet/>
       </section>
-      <aside className='right_nav'>
+      <aside className='col-span-3'>
         <RightAside/>
       </aside>
     </main>
