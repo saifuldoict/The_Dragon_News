@@ -111,7 +111,7 @@ const handleSignin = (e) => {
                     className="absolute right-[8px] top-[36px] cursor-pointer z-50"
                     onClick={()=> setShow(!show)}
                   >
-                 {show ? <IoEyeOff size={20} /> : <FaEye size={20} />}
+                 {show ? <IoEyeOff size={20} /> : <FaEye size={20}/>}
                   </span>
                 </div>
 
