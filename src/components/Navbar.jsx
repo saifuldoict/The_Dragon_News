@@ -2,12 +2,28 @@ import { Link, NavLink } from "react-router";
 import logo from "../assets/img/firebase-logo.png";
 import MyContainer from "./MyContainer";
 import MyLink from "./MyLink";
-import user from "../assets/user.png";
+import userImg from "../assets/user.png";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const {user, logOut}=use(AuthContext);
+  const handleLogOut =()=>{
+ 
+    logOut()
+    .then(() => {
+      toast("Your logout successfull")
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+  console.log(error)
+});
+  }
   return (
     <div className="bg-slate-100f py-2 border-b border-b-slate-300 ">
       <MyContainer className="flex items-center justify-between">
+        <div>{user && user.email}</div>
         <figure>
           <img src={logo} className="w-[55px]" />
         </figure>
@@ -24,8 +40,9 @@ const Navbar = () => {
         </ul>
 
         <button className="bg-purple-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
-          <img src={user} alt="user" className="w-[20px] inline-block mr-2"/>
-          <Link to={"/auth/login"}>Login</Link>
+          <img src={userImg} alt="user" className="w-[20px] inline-block mr-2"/>
+          {user? (<button onClick={handleLogOut}>logout</button> ):(<Link to={"/auth/login"}>Login</Link>)}
+          
         </button>
       </MyContainer>
     </div>
