@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { FaEye } from "react-icons/fa";
 
@@ -14,11 +14,22 @@ import { AuthContext } from "../provider/AuthProvider.jsx";
 
 const Register = () => {
   const [show, setShow] = useState(false);
- const {createUser, setUser} = use(AuthContext)
+ const {createUser, setUser, updateUser} = use(AuthContext)
+ const [nameError, setNameError] = useState(" ");
+
+ const navigate = useNavigate()
    const handleRegister=(e)=>{
+    
       e.preventDefault();
       const form= e.target;
       const name = form.name.value;
+      // if(name.length){
+      //   setNameError("Name should be more then five character");
+      //   return
+      // }
+      // else{
+      //   setNameError("");
+      // }
       const photo = form.photo.value;
       const email = form.email.value;
       const password= form.password.value;
@@ -27,7 +38,14 @@ const Register = () => {
       .then(result=>{
         const user=result.user;
         // console.log(user)
-        setUser(user);
+        updateUser({displayName: name, photoURL: photo}). then(()=>{
+        setUser({...user,displayName: name, photoURL: photo}) 
+        navigate('/') 
+        }).catch((error)=>{
+          console.log(error)
+          setUser(user);
+        })
+        
       }).catch((error)=>{
         const errorCode= error.code;
         const errorMessage=error.message;
@@ -72,6 +90,7 @@ const Register = () => {
                   placeholder="enter name"
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
+                {/* {nameError && <p className="text-xs text-error">{nameError}</p>} */}
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Photo URL</label>

@@ -38,12 +38,14 @@ const Navbar = () => {
             <MyLink to={"/career"}>Career</MyLink>
           </li>
         </ul>
-
-        <button className="bg-purple-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
-          <img src={userImg} alt="user" className="w-[20px] inline-block mr-2"/>
+          <div>
+            <img src={`${user ?user.photoURL :userImg}`} alt="user" className="w-[20px] inline-block mr-2 rounded-full"/>      
+            <button className="bg-purple-500 text-white px-4 py-2 rounded-md font-semibold cursor-pointer">
+          
           {user? (<button onClick={handleLogOut}>logout</button> ):(<Link to={"/auth/login"}>Login</Link>)}
           
         </button>
+          </div>
       </MyContainer>
     </div>
   );

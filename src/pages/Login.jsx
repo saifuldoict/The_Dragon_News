@@ -1,12 +1,17 @@
 import React,{use, useState} from "react";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router";
 
 const Login = () => {
+  const [error, setError] = useState('');
   const {signIn}= use(AuthContext);
+  const location= useLocation();
+   const navigate = useNavigate()
+
 const [user, setUser]= useState()
 const [show, setShow]= useState()
 const handleLogin=(e)=>{
@@ -14,15 +19,16 @@ const handleLogin=(e)=>{
   const form = e.target;
   const email = form.email.value;
   const password = form.password.value
-  console.log({email, password})
+  
   signIn(email, password)
   .then(result=>{
           const user=result.user;
          console.log(user)
-         
+         navigate(`${location.state ? location.state: '/'}`)
         }).catch((error)=>{
           const errorCode= error.code;
-          const errorMessage=error.message;
+          // const errorMessage=error.message;
+          setError(errorCode)
           toast.error
         });
 }
@@ -60,6 +66,7 @@ const handleLogin=(e)=>{
                     type="email"
                     name="email"
                     placeholder="example@email.com"
+                    required
                     className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -70,6 +77,7 @@ const handleLogin=(e)=>{
                     type={show ? 'text':"password"}
                     name="password"
                     placeholder="••••••••"
+                    required
                     className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                   <span
@@ -104,14 +112,15 @@ const handleLogin=(e)=>{
                   />
                   Continue with Google
                 </button>
-
+               {/*error show*/}
+                {error && <p className="text-red-300 text-xs">{error}</p>}
                 <p className="text-center text-sm text-gray/80 mt-3">
                   Don’t have an account?{" "}
                   <Link
                     to="/auth/register"
                     className="text-pink-300 hover:text-white underline"
                   >
-                    Sign up
+                    Register
                   </Link>
                 </p>
               </form>
