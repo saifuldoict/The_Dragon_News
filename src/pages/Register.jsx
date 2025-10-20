@@ -4,44 +4,38 @@ import { FaEye } from "react-icons/fa";
 
 import { IoEyeOff } from "react-icons/io5";
 import MyContainer from "../components/MyContainer.jsx";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase.config.js";
+
+
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { use, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider.jsx";
 
 
 
 const Register = () => {
   const [show, setShow] = useState(false);
-  const handleSignup = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    // 
-    const regExp =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
-      console.log(regExp.test(password));
-
-    if (!regExp.test(password)) {
-      toast.error(
-        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
-      );
-      return;
-    }
-   createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        console.log(res);
-        toast.success("Signup successful");
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log(e.message);
-        toast.error(
-            "User already exists in the database. Etai bastob haah"
-  )});
-   
-  };
+ const {createUser, setUser} = use(AuthContext)
+   const handleRegister=(e)=>{
+      e.preventDefault();
+      const form= e.target;
+      const name = form.name.value;
+      const photo = form.photo.value;
+      const email = form.email.value;
+      const password= form.password.value;
+      console.log(name,photo,email,password)
+      createUser(email, password)
+      .then(result=>{
+        const user=result.user;
+        // console.log(user)
+        setUser(user);
+      }).catch((error)=>{
+        const errorCode= error.code;
+        const errorMessage=error.message;
+        toast.error
+      });
+      
+   }
+  
     
 
   return (
@@ -69,7 +63,25 @@ const Register = () => {
               Sign Up
             </h2>
 
-            <form onSubmit={handleSignup} className="space-y-4">
+            <form onSubmit={handleRegister} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="enter name"
+                  className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Photo URL</label>
+                <input
+                  type="text"
+                  name="photo"
+                  placeholder="photo URL"
+                  className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                />
+              </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Email</label>
                 <input

@@ -1,66 +1,29 @@
 import React,{useState} from "react";
 
-import MyContainer from "../components/MyContainer";
+
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { auth } from "../firebase/firebase.config";
-import { toast } from "react-toastify";
 
 
 
-const googleProvider = new GoogleAuthProvider()
+
+
+
+
+
 
 
 const Login = () => {
-const [user, setUser] = useState(null);
-const [show, setShow] = useState(false);
+
   
 
-const handleSignin = (e) => {
-   e.preventDefault();
-   const email = e.target.email.value;
-   const password = e.target.password.value;
 
-   signInWithEmailAndPassword(auth, email, password)
-   .then((res) => {
-    console.log(res);
-    setUser(res.user);
-    toast.success("Signin successful");
-   })
-   .catch((e) => {
-    console.log(e);
-    toast.error(e.message);
-   });
     
-  };
 
-  const handleGoogleSignin = () => {
-   console.log("google signin");
-    signInWithPopup(auth, googleProvider)
-    .then((res) => {
-      console.log(res);
-      setUser(res.user);
-      toast.success("Google Signin successful");
-    })
-    .catch((e) => {
-      console.log(e);
-      toast.error(e.message);
-    });
-  };
 
-  const handleSignout = () => {
-   signOut(auth)
-      .then(() => {
-        toast.success("Signout successful");
-        setUser(null);
-      })
-      .catch((e) => {
-        toast.error(e.message);
-      }); 
-  };
+ 
 
+  
   return (
     <div className="flex justify-center min-h-screen items-center mx-auto bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 relative overflow-hidden">
     
