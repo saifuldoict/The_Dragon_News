@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
   const {
@@ -13,6 +14,7 @@ const NewsCard = ({ news }) => {
     total_view,
     thumbnail_url,
     details,
+    id
   } = news;
  // Create an array of stars based on the rating number
   const stars = Array.from({ length: rating.number }, (_, i) => i + 1);
@@ -49,9 +51,9 @@ const NewsCard = ({ news }) => {
         />
         <p className="text-gray-600 text-sm leading-relaxed">
           {details.slice(0, 180)}...
-          <span className="text-blue-500 font-medium cursor-pointer">
+          <Link to={`/news-details/${id}`}  className="text-blue-500 font-medium cursor-pointer">
             Read More
-          </span>
+          </Link>
         </p>
       </div>
 
