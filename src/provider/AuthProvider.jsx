@@ -13,13 +13,12 @@ console.log(user)
       return createUserWithEmailAndPassword (auth, email, password);
   }  
 
+  // অবজারভার ফাংশন
   useEffect(()=>{
      const unsubscribe= onAuthStateChanged(auth, (currentUser)=>{
         setUser(currentUser)
       });
-      return ()=>{
-        unsubscribe();
-      }
+      return ()=>{unsubscribe()};
   },[])
     const authData = {
         user,
