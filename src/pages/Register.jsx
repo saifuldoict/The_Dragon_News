@@ -33,7 +33,7 @@ const Register = () => {
       const photo = form.photo.value;
       const email = form.email.value;
       const password= form.password.value;
-      console.log(name,photo,email,password)
+      // console.log(name,photo,email,password)
       createUser(email, password)
       .then(result=>{
         const user=result.user;
@@ -42,7 +42,7 @@ const Register = () => {
         setUser({...user,displayName: name, photoURL: photo}) 
         navigate('/') 
         }).catch((error)=>{
-          console.log(error)
+          // console.log(error)
           setUser(user);
         })
         
